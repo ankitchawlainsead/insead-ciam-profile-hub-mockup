@@ -1727,9 +1727,9 @@
         renderPersona(activePersona, true);
       }));
       document.getElementById('resetPreview').addEventListener('click', () => {
-        const cleared = state().completed.length;
-        const profileChanged = state().profileDone;
-        delete scenarioStates[`${activePersona}-${activeVisit}`];
+        Object.keys(scenarioStates).forEach(key => delete scenarioStates[key]);
+        activePersona = 'executive';
+        activeVisit = 'first';
         pendingTask = null;
         if (dialog.open) dialog.close();
         clearTimeout(toastTimer);
@@ -1737,10 +1737,7 @@
         personalisationNote.classList.remove('is-visible');
         personalisationInfo.setAttribute('aria-expanded', 'false');
         renderPersona(activePersona);
-        const baseline = 0;
-        const persona = activePersona === 'executive' ? 'Executive Education' : 'Degree student';
-        const visit = activeVisit === 'first' ? 'First visit' : 'Returning user';
-        document.getElementById('resetFeedback').textContent = `Scenario reset: ${persona} · ${visit}. ${cleared ? `${cleared} simulated action${cleared === 1 ? '' : 's'} cleared.` : profileChanged ? 'Simulated profile changes cleared.' : 'Already at the starting state.'} Profile restored to ${baseline}%; 0 of 3 actions complete. Persona and visit selection kept.`;
+        document.getElementById('resetFeedback').textContent = 'Preview reset to Executive Education · First visit. All simulated progress cleared; 0% complete and 0 of 3 actions complete.';
       });
       document.getElementById('nextStepButton').addEventListener('click', () => {
         const next = tasks().findIndex((_, index) => !state().completed.includes(index));
