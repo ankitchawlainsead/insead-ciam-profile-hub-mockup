@@ -1642,7 +1642,7 @@
         const current = state();
         const isFirst = activeVisit === 'first';
         const allDone = current.completed.length === tasks().length;
-        const percent = current.profileDone ? 100 : isFirst ? 40 : view.percent;
+        const percent = Math.round(current.completed.length / tasks().length * 100);
         document.getElementById('page-title').textContent = isFirst ? 'Welcome, Amira' : 'Welcome back, Amira.';
         document.querySelector('.hero-lede').textContent = isFirst ? 'Your INSEAD journey starts here. A few steps will help you get ready.' : allDone ? 'You’re up to date. Your services are ready whenever you need them.' : 'Your profile, applications and next steps—connected in one secure place.';
         document.getElementById('profileRole').textContent = view.role;
@@ -1689,7 +1689,7 @@
         document.getElementById('nextStepTitle').textContent = next < 0 ? 'All caught up, Amira.' : `${isFirst ? 'Get started' : 'Your next step'}: ${tasks()[next].title}`;
         document.getElementById('nextStepDescription').textContent = next < 0 ? 'All scenario actions are complete. Future tasks appear here when relevant.' : `${current.completed.length} of ${tasks().length} actions complete in this preview. ${tasks()[next].description}`;
         document.getElementById('nextStepButton').textContent = next < 0 ? 'Explore your services ↓' : 'View next step →';
-        document.getElementById('journeyFill').style.width = `${current.completed.length / tasks().length * 100}%`;
+        document.getElementById('journeyFill').style.width = `${percent}%`;
         document.querySelector('.journey-meter').setAttribute('aria-valuenow', current.completed.length);
         document.querySelectorAll('[data-visit]').forEach(button => {
           button.classList.toggle('is-active', button.dataset.visit === activeVisit);
@@ -1737,7 +1737,7 @@
         personalisationNote.classList.remove('is-visible');
         personalisationInfo.setAttribute('aria-expanded', 'false');
         renderPersona(activePersona);
-        const baseline = activeVisit === 'first' ? 40 : personaViews[activePersona].percent;
+        const baseline = 0;
         const persona = activePersona === 'executive' ? 'Executive Education' : 'Degree student';
         const visit = activeVisit === 'first' ? 'First visit' : 'Returning user';
         document.getElementById('resetFeedback').textContent = `Scenario reset: ${persona} · ${visit}. ${cleared ? `${cleared} simulated action${cleared === 1 ? '' : 's'} cleared.` : profileChanged ? 'Simulated profile changes cleared.' : 'Already at the starting state.'} Profile restored to ${baseline}%; 0 of 3 actions complete. Persona and visit selection kept.`;
