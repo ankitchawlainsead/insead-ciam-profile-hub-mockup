@@ -268,6 +268,8 @@
     .preview-label { color: var(--grey-500); font-size: 11px; }
     .preview-reset { border: 0; background: none; color: var(--green); text-decoration: underline; cursor: pointer; font: inherit; font-size: 12px; }
     .simulation-disclaimer { flex-basis: 100%; margin: 0; color: var(--grey-500); font-size: 12px; }
+    .reset-feedback { flex-basis: 100%; margin: 0; padding: 10px 14px; color: var(--green-dark); background: var(--green-pale); border-left: 3px solid var(--green); font-size: 13px; }
+    .reset-feedback:empty { display: none; }
     .next-step-strip { width: min(calc(100% - 40px), var(--max)); margin: 28px auto 0; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: white; border-left: 4px solid var(--green); border-radius: 4px; }
     .next-step-strip p { margin: 3px 0 0; color: var(--grey-500); font-size: 13px; }
     .next-step-strip strong { color: var(--green-dark); }
@@ -1345,6 +1347,7 @@
       <button type="button" class="preview-reset" id="resetPreview">Reset this scenario ↺</button>
     </div>
     <p class="simulation-disclaimer">Indicative simulation for internal review. Students and participants must complete the actual actions in the relevant INSEAD services; verified completion and eligibility determine real progress and access.</p>
+    <p class="reset-feedback" id="resetFeedback" role="status" aria-live="polite" aria-atomic="true"></p>
   </section>
 
   <main id="main-content">
@@ -1640,7 +1643,7 @@
         const isFirst = activeVisit === 'first';
         const allDone = current.completed.length === tasks().length;
         const percent = current.profileDone ? 100 : isFirst ? 40 : view.percent;
-        document.getElementById('page-title').textContent = isFirst ? 'Welcome to INSEAD, Amira.' : 'Welcome back, Amira.';
+        document.getElementById('page-title').textContent = isFirst ? 'Welcome, Amira' : 'Welcome back, Amira.';
         document.querySelector('.hero-lede').textContent = isFirst ? 'Your INSEAD journey starts here. A few steps will help you get ready.' : allDone ? 'You’re up to date. Your services are ready whenever you need them.' : 'Your profile, applications and next steps—connected in one secure place.';
         document.getElementById('profileRole').textContent = view.role;
         document.getElementById('personaChip').textContent = view.role;
@@ -1719,12 +1722,25 @@
       };
 
       document.querySelectorAll('[data-visit]').forEach(button => button.addEventListener('click', () => {
+        document.getElementById('resetFeedback').textContent = '';
         activeVisit = button.dataset.visit;
         renderPersona(activePersona, true);
       }));
       document.getElementById('resetPreview').addEventListener('click', () => {
+        const cleared = state().completed.length;
+        const profileChanged = state().profileDone;
         delete scenarioStates[`${activePersona}-${activeVisit}`];
+        pendingTask = null;
+        if (dialog.open) dialog.close();
+        clearTimeout(toastTimer);
+        toast.classList.remove('is-visible');
+        personalisationNote.classList.remove('is-visible');
+        personalisationInfo.setAttribute('aria-expanded', 'false');
         renderPersona(activePersona);
+        const baseline = activeVisit === 'first' ? 40 : personaViews[activePersona].percent;
+        const persona = activePersona === 'executive' ? 'Executive Education' : 'Degree student';
+        const visit = activeVisit === 'first' ? 'First visit' : 'Returning user';
+        document.getElementById('resetFeedback').textContent = `Scenario reset: ${persona} · ${visit}. ${cleared ? `${cleared} simulated action${cleared === 1 ? '' : 's'} cleared.` : profileChanged ? 'Simulated profile changes cleared.' : 'Already at the starting state.'} Profile restored to ${baseline}%; 0 of 3 actions complete. Persona and visit selection kept.`;
       });
       document.getElementById('nextStepButton').addEventListener('click', () => {
         const next = tasks().findIndex((_, index) => !state().completed.includes(index));
@@ -1738,6 +1754,7 @@
       document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
       document.getElementById('simulateCompletion').addEventListener('click', () => {
         if (pendingTask === null) return;
+        document.getElementById('resetFeedback').textContent = '';
         const current = state();
         if (pendingTask === 'profile' || tasks()[pendingTask].title.includes('profile')) current.profileDone = true;
         if (pendingTask !== 'profile' && !current.completed.includes(pendingTask)) current.completed.push(pendingTask);
@@ -1751,7 +1768,10 @@
       });
 
       document.querySelectorAll('[data-persona]').forEach((button) => {
-        button.addEventListener('click', () => renderPersona(button.dataset.persona, true));
+        button.addEventListener('click', () => {
+          document.getElementById('resetFeedback').textContent = '';
+          renderPersona(button.dataset.persona, true);
+        });
       });
 
       personalisationInfo.addEventListener('click', () => {
