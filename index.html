@@ -206,17 +206,74 @@
     .breadcrumb a { text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
 
+    .prototype-controls {
+      width: min(calc(100% - 40px), var(--max));
+      min-height: 58px;
+      margin: 0 auto 14px;
+      padding: 10px 14px 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--grey-700);
+      background: #f8faf9;
+      border: 1px dashed #9ebbad;
+      border-radius: 5px;
+    }
+
+    .prototype-context {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .prototype-context strong {
+      color: var(--green);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .persona-switcher {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      background: var(--white);
+      border: 1px solid #d5dadd;
+      border-radius: 24px;
+    }
+
+    .persona-switcher button {
+      min-height: 34px;
+      padding: 0 14px;
+      color: var(--grey-700);
+      background: transparent;
+      border: 0;
+      border-radius: 19px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .persona-switcher button.is-active {
+      color: var(--white);
+      background: var(--green);
+    }
+
     main { overflow: hidden; }
 
     .hero-shell {
       position: relative;
       width: min(calc(100% - 40px), var(--max));
       margin: 0 auto;
-      padding-bottom: 114px;
+      padding-bottom: 84px;
     }
 
     .hero {
-      min-height: 550px;
+      min-height: 430px;
       position: relative;
       overflow: hidden;
       display: grid;
@@ -241,7 +298,7 @@
     }
 
     .hero-copy {
-      padding: 76px 28px 128px 62px;
+      padding: 52px 28px 96px 54px;
       align-self: center;
     }
 
@@ -278,17 +335,17 @@
 
     h1 {
       max-width: 610px;
-      margin-bottom: 20px;
-      font-size: clamp(50px, 5.1vw, 78px);
+      margin-bottom: 16px;
+      font-size: clamp(46px, 4.7vw, 68px);
       line-height: 1.02;
       letter-spacing: -.035em;
     }
 
     .hero-lede {
       max-width: 540px;
-      margin-bottom: 30px;
+      margin-bottom: 22px;
       color: #e9f4ea;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.5;
     }
 
@@ -310,14 +367,14 @@
 
     .hero-art {
       position: relative;
-      min-height: 500px;
+      min-height: 400px;
       display: grid;
       place-items: center;
-      padding: 28px 34px 98px 0;
+      padding: 16px 34px 76px 0;
     }
 
     .hero-art svg {
-      width: min(100%, 610px);
+      width: min(100%, 500px);
       height: auto;
       filter: drop-shadow(0 18px 24px rgba(0, 35, 36, .25));
     }
@@ -327,8 +384,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      min-height: 96px;
-      padding: 22px 62px;
+      min-height: 74px;
+      padding: 16px 54px;
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
@@ -358,8 +415,8 @@
       z-index: 5;
       left: 50%;
       bottom: 0;
-      width: min(100% - 84px, 1080px);
-      min-height: 190px;
+      width: min(100% - 72px, 1100px);
+      min-height: 142px;
       transform: translateX(-50%);
       display: grid;
       grid-template-columns: minmax(260px, .9fr) minmax(260px, .72fr) minmax(300px, 1fr);
@@ -371,25 +428,25 @@
 
     .profile-identity,
     .readiness,
-    .profile-actions { padding: 30px 34px; }
+    .profile-actions { padding: 20px 28px; }
 
     .profile-identity {
       display: grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 60px 1fr;
       align-items: center;
       gap: 18px;
     }
 
     .avatar {
-      width: 72px;
-      height: 72px;
+      width: 60px;
+      height: 60px;
       display: grid;
       place-items: center;
       color: var(--white);
       background: linear-gradient(145deg, var(--green-bright), var(--green));
       border-radius: 50%;
       font-family: "Roboto Slab", Georgia, serif;
-      font-size: 28px;
+      font-size: 24px;
       box-shadow: inset 0 0 0 6px rgba(255,255,255,.18);
     }
 
@@ -408,16 +465,17 @@
 
     .readiness {
       display: grid;
-      grid-template-columns: 78px 1fr;
+      grid-template-columns: 64px 1fr;
       align-items: center;
       gap: 18px;
       border-left: 1px solid #dfe6ea;
       border-right: 1px solid #dfe6ea;
+      background: #f3f8f4;
     }
 
     .progress-ring {
-      width: 78px;
-      height: 78px;
+      width: 64px;
+      height: 64px;
       position: relative;
       display: grid;
       place-items: center;
@@ -427,8 +485,8 @@
 
     .progress-ring::before {
       content: "";
-      width: 60px;
-      height: 60px;
+      width: 48px;
+      height: 48px;
       position: absolute;
       background: var(--white);
       border-radius: 50%;
@@ -493,13 +551,78 @@
     .section {
       width: min(calc(100% - 40px), var(--max));
       margin: 0 auto;
-      padding: 82px 0;
+      padding: 60px 0;
     }
 
     .section-heading {
       max-width: 760px;
-      margin-bottom: 34px;
+      margin-bottom: 28px;
     }
+
+    .section-heading--gateway {
+      max-width: none;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 30px;
+    }
+
+    .persona-chip {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      color: var(--green);
+      background: var(--green-pale);
+      border: 1px solid var(--green-soft);
+      border-radius: 22px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .persona-chip::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--green-bright);
+      border-radius: 50%;
+    }
+
+    .gateway-context {
+      display: grid;
+      justify-items: end;
+      gap: 8px;
+    }
+
+    .personalisation-info {
+      padding: 0;
+      color: var(--green);
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .personalisation-note {
+      max-width: 820px;
+      margin: -12px 0 26px;
+      padding: 14px 16px;
+      display: none;
+      color: var(--grey-700);
+      background: var(--green-pale);
+      border-left: 4px solid var(--green-bright);
+      font-size: 13px;
+    }
+
+    .personalisation-note.is-visible { display: block; }
+
+    .personalisation-note strong { color: var(--green-dark); }
 
     .eyebrow {
       display: flex;
@@ -541,7 +664,7 @@
     }
 
     .app-card {
-      min-height: 326px;
+      min-height: 316px;
       position: relative;
       overflow: hidden;
       display: grid;
@@ -569,6 +692,37 @@
       color: var(--white);
       background: var(--green-deep);
     }
+
+    .service-status {
+      position: absolute;
+      z-index: 2;
+      top: 14px;
+      left: 14px;
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 10px;
+      color: var(--green-dark);
+      background: rgba(255,255,255,.94);
+      border-radius: 16px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    }
+
+    .service-status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--green-bright);
+      border-radius: 50%;
+    }
+
+    .service-status--action::before { background: #d87518; }
+    .service-status--new::before { background: #2b7cd3; }
 
     .app-card:nth-child(2) .app-visual { background: var(--green); }
     .app-card:nth-child(3) .app-visual { background: #005548; }
@@ -760,6 +914,65 @@
 
     .panel-actions small { color: var(--grey-500); }
 
+    .action-list {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 30px;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid #dfe6ea;
+    }
+
+    .action-item {
+      min-height: 86px;
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid #dfe6ea;
+    }
+
+    .action-number {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: var(--green-pale);
+      border: 1px solid var(--green-soft);
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .action-copy strong,
+    .action-copy span { display: block; }
+    .action-copy strong { margin-bottom: 3px; font-size: 14px; }
+    .action-copy span { color: var(--grey-500); font-size: 13px; }
+
+    .action-cta {
+      display: grid;
+      justify-items: end;
+      gap: 4px;
+    }
+
+    .action-cta small {
+      color: #a14d00;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .action-cta a {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .action-cta a:hover { text-decoration: underline; }
+
     .support-panel {
       overflow: hidden;
       border-radius: 5px 5px 5px 56px;
@@ -784,6 +997,43 @@
     }
 
     .support-top p { margin: 0; color: var(--green-soft); font-size: 14px; }
+
+    .announcement-list { padding: 8px 28px 18px; }
+
+    .announcement-item {
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      color: var(--ink);
+      border-bottom: 1px solid #dfe6ea;
+      text-decoration: none;
+    }
+
+    .announcement-item:last-child { border-bottom: 0; }
+
+    .announcement-date {
+      display: grid;
+      justify-items: center;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .announcement-date strong {
+      margin-top: -2px;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .announcement-copy strong,
+    .announcement-copy span { display: block; }
+    .announcement-copy strong { font-size: 14px; }
+    .announcement-copy span { margin-top: 2px; color: var(--grey-500); font-size: 12px; }
+    .announcement-arrow { color: var(--green); font-size: 18px; }
 
     .support-links { padding: 6px 30px 20px; }
 
@@ -917,6 +1167,13 @@
       outline-offset: 4px;
     }
 
+    @media (max-width: 1240px) {
+      .primary-nav { display: none; }
+      .header-main { grid-template-columns: auto 1fr auto; }
+      .header-actions { justify-self: end; }
+      .menu-button { display: inline-flex; }
+    }
+
     @media (max-width: 1080px) {
       .primary-nav { display: none; }
       .header-main { grid-template-columns: auto 1fr auto; }
@@ -927,7 +1184,7 @@
       .profile-card { grid-template-columns: 1fr 1fr; }
       .profile-actions { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; border-top: 1px solid #dfe6ea; }
       .profile-actions small { grid-column: 1 / -1; }
-      .hero-shell { padding-bottom: 210px; }
+      .hero-shell { padding-bottom: 184px; }
       .app-grid { grid-template-columns: repeat(2, 1fr); }
       .journey__inner { grid-template-columns: 1fr; gap: 48px; }
     }
@@ -940,15 +1197,20 @@
       .account-button span { display: none; }
       .account-button { width: 44px; padding: 0; border-radius: 50%; }
       .breadcrumb { padding-top: 12px; }
+      .prototype-controls { align-items: stretch; flex-direction: column; padding: 14px; }
+      .prototype-context { align-items: start; }
+      .prototype-context span { line-height: 1.4; }
+      .persona-switcher { width: 100%; }
+      .persona-switcher button { flex: 1; padding: 0 8px; }
       .hero-shell { width: 100%; padding-bottom: 340px; }
       .hero {
-        min-height: 700px;
+        min-height: 620px;
         grid-template-columns: 1fr;
         border-radius: 0 0 44px 0;
       }
-      .hero-copy { padding: 54px 24px 24px; }
+      .hero-copy { padding: 44px 24px 20px; }
       .hero-lede { font-size: 17px; }
-      .hero-art { min-height: 330px; padding: 0 18px 116px; }
+      .hero-art { min-height: 290px; padding: 0 18px 90px; }
       .hero-art svg { max-width: 440px; }
       .hero-caption { padding: 18px 24px; grid-template-columns: 1fr; gap: 6px; }
       .hero-caption a { display: none; }
@@ -962,6 +1224,9 @@
       .readiness { border: 0; border-top: 1px solid #dfe6ea; border-bottom: 1px solid #dfe6ea; }
       .profile-actions { grid-column: auto; grid-template-columns: 1fr; border: 0; }
       .section { padding: 62px 0; }
+      .section-heading--gateway { grid-template-columns: 1fr; align-items: start; gap: 14px; }
+      .gateway-context { justify-items: start; }
+      .persona-chip { width: fit-content; }
       .app-grid { grid-template-columns: 1fr; }
       .app-card { min-height: 280px; grid-template-rows: 104px 1fr; }
       .profile-layout { grid-template-columns: 1fr; }
@@ -969,6 +1234,8 @@
       .panel-heading { align-items: start; flex-direction: column; gap: 4px; }
       .profile-list li { grid-template-columns: 32px 1fr; padding: 11px 0; }
       .status-copy { grid-column: 2; }
+      .action-item { grid-template-columns: 36px 1fr; }
+      .action-cta { grid-column: 2; justify-items: start; }
       .journey__inner { padding: 62px 0; }
       .journey-steps { grid-template-columns: 1fr; gap: 44px; }
       .footer-inner { align-items: start; flex-direction: column; }
@@ -1012,7 +1279,7 @@
         <button class="icon-button" type="button" aria-label="Search">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
-        <a class="account-button" href="#profile-readiness">
+        <a class="account-button" href="#next-actions">
           <span>Sign In</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 20c.7-3.4 3-5.4 6.5-5.4s5.8 2 6.5 5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </a>
@@ -1026,6 +1293,17 @@
   <div class="breadcrumb" aria-label="Breadcrumb">
     <a href="#">Home</a><span aria-hidden="true">/</span><span>My Profile and Access</span>
   </div>
+
+  <section class="prototype-controls" aria-label="Internal persona preview">
+    <div class="prototype-context">
+      <strong>Internal prototype</strong>
+      <span>Switch persona to preview how entitlements, priorities and updates can change.</span>
+    </div>
+    <div class="persona-switcher" role="group" aria-label="Preview persona">
+      <button class="is-active" type="button" data-persona="executive" aria-pressed="true">Executive Education</button>
+      <button type="button" data-persona="degree" aria-pressed="false">Degree student</button>
+    </div>
+  </section>
 
   <main id="main-content">
     <section class="hero-shell" aria-labelledby="page-title">
@@ -1085,47 +1363,61 @@
       <div class="profile-card" aria-label="Profile summary">
         <div class="profile-identity">
           <div class="avatar" aria-hidden="true">AK</div>
-          <div><h2>Amira Khan</h2><p>Executive Education participant</p></div>
+          <div><h2>Amira Khan</h2><p id="profileRole">Executive Education participant</p></div>
         </div>
         <div class="readiness">
-          <div class="progress-ring" aria-label="Profile 72 percent complete"><strong>72%</strong></div>
-          <div><p><strong>Profile readiness</strong></p><p>Two details need your attention</p></div>
+          <div class="progress-ring" id="progressRing" aria-label="Profile 72 percent complete"><strong id="profilePercent">72%</strong></div>
+          <div><p><strong>Profile readiness</strong></p><p id="profileAttention">2 details need your attention</p></div>
         </div>
         <div class="profile-actions">
-          <a class="button button--primary mock-link" href="#profile-readiness">Review your profile</a>
-          <small>Profile changes open in the secure account service.</small>
+          <a class="button button--primary" id="profileAction" href="#next-actions">Complete 2 details</a>
+          <small id="profileRecommendation">Recommended before your next application step.</small>
         </div>
       </div>
     </section>
 
     <section class="section" id="applications" aria-labelledby="applications-title">
-      <div class="section-heading">
-        <div class="eyebrow">Your services</div>
-        <h2 id="applications-title">Pick up where you left off.</h2>
-        <p>Only applications available through your current INSEAD account appear here.</p>
+      <div class="section-heading section-heading--gateway">
+        <div>
+          <div class="eyebrow">Your digital gateway</div>
+          <h2 id="applications-title">Your services, in one place.</h2>
+          <p id="gatewaySubtitle">Shown for your account and current stage at INSEAD.</p>
+        </div>
+        <div class="gateway-context">
+          <div class="persona-chip" id="personaChip">Executive Education participant</div>
+          <button class="personalisation-info" id="personalisationInfo" type="button" aria-expanded="false" aria-controls="personalisationNote">Why this changes</button>
+        </div>
+      </div>
+
+      <div class="personalisation-note" id="personalisationNote">
+        <strong>This content is personalised.</strong> The production view can use account relationship, programme, entitlements and journey stage to decide which services, statuses, actions and announcements appear. The examples in this mockup are illustrative.
       </div>
 
       <div class="app-grid">
         <a class="app-card mock-link" href="#" aria-label="Open ePortal">
           <div class="app-visual">
+            <span class="service-status">Access ready</span>
             <div class="app-icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 8.5h18v15H7z" stroke="currentColor" stroke-width="1.8"/><path d="M11 13h10M11 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m21 20 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           </div>
           <div class="app-body"><div class="app-label">Online programmes</div><h3>ePortal</h3><p>Enrol in and manage your fully online Executive Education programmes.</p><span class="app-arrow" aria-hidden="true">→</span></div>
         </a>
         <a class="app-card mock-link" href="#" aria-label="Open Application Online">
           <div class="app-visual">
+            <span class="service-status service-status--action">Action required</span>
             <div class="app-icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M10 5.5h12v5H10zM7 10.5h18v16H7z" stroke="currentColor" stroke-width="1.8"/><path d="M11 16h10M11 20h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           </div>
-          <div class="app-body"><div class="app-label">Applications</div><h3>Application Online</h3><p>Apply for in-person and hybrid Executive Education programmes.</p><span class="app-arrow" aria-hidden="true">→</span></div>
+          <div class="app-body"><div class="app-label">Applications</div><h3>Application Online</h3><p>Your application is in progress with 2 steps remaining.</p><span class="app-arrow" aria-hidden="true">→</span></div>
         </a>
         <a class="app-card mock-link" href="#" aria-label="Open Intrepid">
           <div class="app-visual">
+            <span class="service-status service-status--new">New activity</span>
             <div class="app-icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 8h20v16H6z" stroke="currentColor" stroke-width="1.8"/><path d="M11 8v-2h10v2M10 20l4-4 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           </div>
           <div class="app-body"><div class="app-label">Learning</div><h3>Intrepid</h3><p>Continue your learning and programme experience from one place.</p><span class="app-arrow" aria-hidden="true">→</span></div>
         </a>
         <a class="app-card mock-link" href="#" aria-label="Open Study">
           <div class="app-visual">
+            <span class="service-status">Available</span>
             <div class="app-icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m5 11 11-5 11 5-11 5-11-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 13.5V20c4.5 3 9.5 3 14 0v-6.5M27 11v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           </div>
           <div class="app-body"><div class="app-label">Academic tools</div><h3>Study</h3><p>Reach the academic tools and resources available to you.</p><span class="app-arrow" aria-hidden="true">→</span></div>
@@ -1138,51 +1430,48 @@
       </div>
     </section>
 
-    <section class="section profile-section" id="profile-readiness" aria-labelledby="profile-title">
+    <section class="section profile-section" id="next-actions" aria-labelledby="profile-title">
       <div class="profile-layout">
         <article class="readiness-panel">
           <div class="panel-heading">
-            <div><div class="eyebrow">Your profile</div><h2 id="profile-title">Ready for a smoother experience</h2></div>
-            <div class="panel-score">72% complete</div>
+            <div><div class="eyebrow">Personalised for you</div><h2 id="profile-title">What needs your attention</h2></div>
+            <div class="panel-score" id="panelScore">3 next actions</div>
           </div>
-          <ul class="profile-list">
-            <li><span class="status-icon status-icon--done" aria-hidden="true">✓</span><strong>Name and email</strong><span class="status-copy">Complete</span></li>
-            <li><span class="status-icon status-icon--done" aria-hidden="true">✓</span><strong>Country of residence</strong><span class="status-copy">Complete</span></li>
-            <li><span class="status-icon status-icon--todo" aria-hidden="true">2</span><strong>Phone and job title</strong><span class="status-copy status-copy--action">Needs attention</span></li>
+          <ul class="action-list" id="actionList">
+            <li class="action-item">
+              <span class="action-number" aria-hidden="true">1</span>
+              <div class="action-copy"><strong>Complete your profile</strong><span>Add your phone number and current job title.</span></div>
+              <div class="action-cta"><small>Recommended</small><a class="mock-link" href="#">Complete now →</a></div>
+            </li>
+            <li class="action-item">
+              <span class="action-number" aria-hidden="true">2</span>
+              <div class="action-copy"><strong>Finish your programme application</strong><span>2 steps remain before it can be submitted.</span></div>
+              <div class="action-cta"><small>Due 30 Nov</small><a class="mock-link" href="#">Continue →</a></div>
+            </li>
+            <li class="action-item">
+              <span class="action-number" aria-hidden="true">3</span>
+              <div class="action-copy"><strong>Review your new learning activity</strong><span>A leadership reflection is ready in Intrepid.</span></div>
+              <div class="action-cta"><small>New</small><a class="mock-link" href="#">Open activity →</a></div>
+            </li>
           </ul>
           <div class="panel-actions">
-            <a class="button button--primary mock-link" href="#">Complete your profile <span aria-hidden="true">↗</span></a>
-            <small>Opens securely outside INSEAD.edu</small>
+            <a class="button button--secondary mock-link" href="#applications">View all services</a>
+            <small>Actions are based on your account, programme and current stage.</small>
           </div>
         </article>
 
         <aside class="support-panel" aria-labelledby="support-title">
           <div class="support-top">
-            <svg width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 14a10 10 0 0 1 20 0v7a3 3 0 0 1-3 3h-3v-8h6M6 14v10h6v-8H6M20 25c-1 2-3 3-6 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <h2 id="support-title">Need account help?</h2>
-            <p>Get support with access, sign-in and profile questions.</p>
+            <svg width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="8" width="22" height="19" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M10 5v6M22 5v6M5 14h22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <h2 id="support-title">Important for you</h2>
+            <p>Deadlines, events and updates relevant to your journey.</p>
           </div>
-          <div class="support-links">
-            <a class="mock-link" href="#"><span>Get account help</span><span aria-hidden="true">→</span></a>
-            <a class="mock-link" href="#"><span>Manage sign-in and security</span><span aria-hidden="true">↗</span></a>
-            <a class="mock-link" href="#"><span>Privacy and profile data</span><span aria-hidden="true">→</span></a>
+          <div class="announcement-list" id="announcementList">
+            <a class="announcement-item mock-link" href="#"><span class="announcement-date">Nov<strong>30</strong></span><span class="announcement-copy"><strong>Application closing date</strong><span>Executive Education programme</span></span><span class="announcement-arrow" aria-hidden="true">→</span></a>
+            <a class="announcement-item mock-link" href="#"><span class="announcement-date">Dec<strong>04</strong></span><span class="announcement-copy"><strong>Welcome webinar</strong><span>Online · 16:00 CET</span></span><span class="announcement-arrow" aria-hidden="true">→</span></a>
+            <a class="announcement-item mock-link" href="#"><span class="announcement-date">Now<strong>✓</strong></span><span class="announcement-copy"><strong>Campus access is ready</strong><span>Your digital pass is available</span></span><span class="announcement-arrow" aria-hidden="true">→</span></a>
           </div>
         </aside>
-      </div>
-    </section>
-
-    <section class="journey" aria-labelledby="journey-title">
-      <div class="journey__inner">
-        <div class="journey-copy">
-          <div class="eyebrow" style="color:#88c697">Connected access</div>
-          <h2 id="journey-title">One account. Your INSEAD journey.</h2>
-          <p>Sign in once, keep your profile ready, and move between the services available to you.</p>
-        </div>
-        <div class="journey-steps">
-          <div class="journey-step" data-step="1"><h3>Sign in securely</h3><p>Use the sign-in option that belongs to your INSEAD account.</p></div>
-          <div class="journey-step" data-step="2"><h3>Keep details current</h3><p>Your profile helps make future forms and journeys quicker.</p></div>
-          <div class="journey-step" data-step="3"><h3>Open your services</h3><p>See only the applications your account is entitled to access.</p></div>
-        </div>
       </div>
     </section>
   </main>
@@ -1203,15 +1492,144 @@
     (() => {
       const toast = document.getElementById('toast');
       let toastTimer;
-      document.querySelectorAll('.mock-link').forEach((link) => {
-        link.addEventListener('click', (event) => {
-          const target = link.getAttribute('href');
-          if (!target || target === '#') event.preventDefault();
-          window.clearTimeout(toastTimer);
-          toast.classList.add('is-visible');
-          toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2600);
+      const serviceCards = [...document.querySelectorAll('.app-card')];
+      const actionList = document.getElementById('actionList');
+      const announcementList = document.getElementById('announcementList');
+      const personalisationNote = document.getElementById('personalisationNote');
+      const personalisationInfo = document.getElementById('personalisationInfo');
+
+      const personaViews = {
+        executive: {
+          role: 'Executive Education participant',
+          title: 'Your services, in one place.',
+          subtitle: 'Shown for your account and current stage at INSEAD.',
+          context: '<strong>Executive Education participant view.</strong> This example prioritises an in-progress application, online learning activity, profile completion and an upcoming programme deadline.',
+          percent: 72,
+          attention: '2 details need your attention',
+          profileAction: 'Complete 2 details',
+          recommendation: 'Recommended before your next application step.',
+          panelScore: '3 next actions',
+          services: [
+            { status: 'Access ready', statusClass: '', label: 'Online programmes', title: 'ePortal', description: 'Enrol in and manage your fully online Executive Education programmes.' },
+            { status: 'Action required', statusClass: 'service-status--action', label: 'Applications', title: 'Application Online', description: 'Your application is in progress with 2 steps remaining.' },
+            { status: 'New activity', statusClass: 'service-status--new', label: 'Learning', title: 'Intrepid', description: 'Continue your learning and programme experience from one place.' },
+            { status: 'Available', statusClass: '', label: 'Academic tools', title: 'Study', description: 'Reach the academic tools and resources available to you.' }
+          ],
+          actions: [
+            { title: 'Complete your profile', description: 'Add your phone number and current job title.', tag: 'Recommended', cta: 'Complete now →' },
+            { title: 'Finish your programme application', description: '2 steps remain before it can be submitted.', tag: 'Due 30 Nov', cta: 'Continue →' },
+            { title: 'Review your new learning activity', description: 'A leadership reflection is ready in Intrepid.', tag: 'New', cta: 'Open activity →' }
+          ],
+          announcements: [
+            { month: 'Nov', day: '30', title: 'Application closing date', meta: 'Executive Education programme' },
+            { month: 'Dec', day: '04', title: 'Welcome webinar', meta: 'Online · 16:00 CET' },
+            { month: 'Now', day: '✓', title: 'Campus access is ready', meta: 'Your digital pass is available' }
+          ]
+        },
+        degree: {
+          role: 'MBA student · Class of 2027',
+          title: 'Your student services, in one place.',
+          subtitle: 'Shown for your MBA enrolment, campus and current study stage.',
+          context: '<strong>Degree student view.</strong> This example prioritises academic registration, learning activity, career support and practical campus access for an enrolled MBA student.',
+          percent: 88,
+          attention: '1 detail needs your attention',
+          profileAction: 'Complete 1 detail',
+          recommendation: 'Recommended before course registration closes.',
+          panelScore: '3 next actions',
+          services: [
+            { status: 'Action required', statusClass: 'service-status--action', label: 'Academic tools', title: 'Study', description: 'Review registration, timetable and academic information.' },
+            { status: '3 new items', statusClass: 'service-status--new', label: 'Learning', title: 'Canvas', description: 'Access course materials, assignments and discussions.' },
+            { status: 'New activity', statusClass: 'service-status--new', label: 'Careers', title: 'CareerGlobe', description: 'Book coaching and explore career resources.' },
+            { status: 'Access ready', statusClass: '', label: 'Campus life', title: 'Campus Services', description: 'View your digital pass and practical campus services.' }
+          ],
+          actions: [
+            { title: 'Complete course registration', description: 'Confirm elective choices and review your timetable.', tag: 'Due 12 Dec', cta: 'Review registration →' },
+            { title: 'Review new course activity', description: '3 new items are waiting in Canvas.', tag: 'New', cta: 'Open Canvas →' },
+            { title: 'Add your campus pass to your wallet', description: 'Your digital pass is ready to use.', tag: 'Ready', cta: 'View pass →' }
+          ],
+          announcements: [
+            { month: 'Dec', day: '12', title: 'Course registration closes', meta: 'MBA Class of 2027' },
+            { month: 'Jan', day: '08', title: 'Welcome week begins', meta: 'Fontainebleau campus' },
+            { month: 'Now', day: '✓', title: 'Campus pass is ready', meta: 'Add it to your mobile wallet' }
+          ]
+        }
+      };
+
+      const renderActions = (actions) => actions.map((action, index) => `
+        <li class="action-item">
+          <span class="action-number" aria-hidden="true">${index + 1}</span>
+          <div class="action-copy"><strong>${action.title}</strong><span>${action.description}</span></div>
+          <div class="action-cta"><small>${action.tag}</small><a class="mock-link" href="#">${action.cta}</a></div>
+        </li>`).join('');
+
+      const renderAnnouncements = (announcements) => announcements.map((item) => `
+        <a class="announcement-item mock-link" href="#">
+          <span class="announcement-date">${item.month}<strong>${item.day}</strong></span>
+          <span class="announcement-copy"><strong>${item.title}</strong><span>${item.meta}</span></span>
+          <span class="announcement-arrow" aria-hidden="true">→</span>
+        </a>`).join('');
+
+      const renderPersona = (personaKey, revealContext = false) => {
+        const view = personaViews[personaKey];
+        document.getElementById('profileRole').textContent = view.role;
+        document.getElementById('personaChip').textContent = view.role;
+        document.getElementById('applications-title').textContent = view.title;
+        document.getElementById('gatewaySubtitle').textContent = view.subtitle;
+        document.getElementById('profilePercent').textContent = `${view.percent}%`;
+        document.getElementById('profileAttention').textContent = view.attention;
+        document.getElementById('profileAction').textContent = view.profileAction;
+        document.getElementById('profileRecommendation').textContent = view.recommendation;
+        document.getElementById('panelScore').textContent = view.panelScore;
+        document.getElementById('progressRing').style.background = `conic-gradient(var(--green-bright) 0 ${view.percent}%, var(--green-soft) ${view.percent}% 100%)`;
+        document.getElementById('progressRing').setAttribute('aria-label', `Profile ${view.percent} percent complete`);
+        personalisationNote.innerHTML = view.context + ' Service names and statuses are illustrative for stakeholder discussion.';
+
+        serviceCards.forEach((card, index) => {
+          const service = view.services[index];
+          const status = card.querySelector('.service-status');
+          status.className = `service-status ${service.statusClass}`.trim();
+          status.textContent = service.status;
+          card.querySelector('.app-label').textContent = service.label;
+          card.querySelector('h3').textContent = service.title;
+          card.querySelector('.app-body p').textContent = service.description;
+          card.setAttribute('aria-label', `Open ${service.title}`);
         });
+
+        actionList.innerHTML = renderActions(view.actions);
+        announcementList.innerHTML = renderAnnouncements(view.announcements);
+
+        document.querySelectorAll('[data-persona]').forEach((button) => {
+          const isActive = button.dataset.persona === personaKey;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
+        });
+
+        if (revealContext) {
+          personalisationNote.classList.add('is-visible');
+          personalisationInfo.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      document.querySelectorAll('[data-persona]').forEach((button) => {
+        button.addEventListener('click', () => renderPersona(button.dataset.persona, true));
       });
+
+      personalisationInfo.addEventListener('click', () => {
+        const isVisible = personalisationNote.classList.toggle('is-visible');
+        personalisationInfo.setAttribute('aria-expanded', String(isVisible));
+      });
+
+      document.addEventListener('click', (event) => {
+        const link = event.target.closest('.mock-link');
+        if (!link) return;
+        const target = link.getAttribute('href');
+        if (!target || target === '#') event.preventDefault();
+        window.clearTimeout(toastTimer);
+        toast.classList.add('is-visible');
+        toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2600);
+      });
+
+      renderPersona('executive');
     })();
   </script>
 </body>
