@@ -263,6 +263,39 @@
       background: var(--green);
     }
 
+    .prototype-controls { flex-wrap: wrap; }
+    .preview-options { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .preview-label { color: var(--grey-500); font-size: 11px; }
+    .preview-reset { border: 0; background: none; color: var(--green); text-decoration: underline; cursor: pointer; font: inherit; font-size: 12px; }
+    .simulation-disclaimer { flex-basis: 100%; margin: 0; color: var(--grey-500); font-size: 12px; }
+    .next-step-strip { width: min(calc(100% - 40px), var(--max)); margin: 28px auto 0; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: white; border-left: 4px solid var(--green); border-radius: 4px; }
+    .next-step-strip p { margin: 3px 0 0; color: var(--grey-500); font-size: 13px; }
+    .next-step-strip strong { color: var(--green-dark); }
+    .journey-meter { width: 140px; height: 5px; margin-top: 10px; background: var(--green-soft); border-radius: 8px; overflow: hidden; }
+    .journey-meter span { display: block; height: 100%; background: var(--green); transition: width .4s; }
+    .task-complete { opacity: .7; }
+    .task-complete .action-number { color: white; background: var(--green); }
+    .action-cta button { padding: 5px 0; border: 0; background: transparent; color: var(--green); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .service-status--locked { color: #49535a; background: #eff2f4; }
+    .service-status--locked::before { background: #7c858b; }
+    .app-card[data-locked="true"] .app-visual { background: #566769; }
+    .demo-dialog { width: min(560px, calc(100% - 32px)); padding: 0; color: var(--ink); border: 0; border-radius: 8px 8px 40px 8px; box-shadow: 0 25px 100px #002d2e55; }
+    .demo-dialog::backdrop { background: #002d2eb3; backdrop-filter: blur(4px); }
+    .demo-dialog [hidden] { display: none; }
+    .dialog-top { padding: 28px 32px 22px; color: white; background: var(--green-dark); }
+    .dialog-top h2 { margin: 10px 0 0; font-size: 31px; line-height: 1.15; }
+    .dialog-top small { color: #a8d4b3; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .dialog-body { padding: 26px 32px 32px; }
+    .dialog-body p { font-size: 14px; }
+    .dialog-outcome { padding: 15px; background: var(--green-pale); border-left: 3px solid var(--green); font-size: 13px; }
+    .dialog-caution { margin: 18px 0; color: var(--grey-500); font-size: 12px !important; }
+    .dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    @media (max-width: 760px) {
+      .preview-options { align-items: stretch; flex-direction: column; }
+      .next-step-strip { align-items: stretch; flex-direction: column; gap: 16px; }
+      .dialog-top, .dialog-body { padding: 24px; }
+    }
+
     main { overflow: hidden; }
 
     .hero-shell {
@@ -1303,6 +1336,15 @@
       <button class="is-active" type="button" data-persona="executive" aria-pressed="true">Executive Education</button>
       <button type="button" data-persona="degree" aria-pressed="false">Degree student</button>
     </div>
+    <div class="preview-options">
+      <span class="preview-label">Experience</span>
+      <div class="persona-switcher" role="group" aria-label="Preview visit">
+        <button type="button" data-visit="first" aria-pressed="false">First visit</button>
+        <button class="is-active" type="button" data-visit="returning" aria-pressed="true">Returning user</button>
+      </div>
+      <button type="button" class="preview-reset" id="resetPreview">Reset this scenario ↺</button>
+    </div>
+    <p class="simulation-disclaimer">Indicative simulation for internal review. Students and participants must complete the actual actions in the relevant INSEAD services; verified completion and eligibility determine real progress and access.</p>
   </section>
 
   <main id="main-content">
@@ -1375,6 +1417,11 @@
         </div>
       </div>
     </section>
+
+    <aside class="next-step-strip" aria-label="Your next step" aria-live="polite">
+      <div><strong id="nextStepTitle">Your next step</strong><p id="nextStepDescription"></p><div class="journey-meter" role="progressbar" aria-label="Scenario actions completed" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span id="journeyFill" style="width:0%"></span></div></div>
+      <button class="button button--primary" id="nextStepButton" type="button">View next step →</button>
+    </aside>
 
     <section class="section" id="applications" aria-labelledby="applications-title">
       <div class="section-heading section-heading--gateway">
@@ -1483,6 +1530,11 @@
     </div>
   </footer>
 
+  <dialog class="demo-dialog" id="demoDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
+    <div class="dialog-top"><small id="dialogEyebrow">Indicative service hand-off</small><h2 id="dialogTitle"></h2></div>
+    <div class="dialog-body"><p id="dialogDescription"></p><div class="dialog-outcome" id="dialogOutcome"></div><p class="dialog-caution">This is a demonstration only. No account data is saved and no real access is granted. In production, you must complete the actual action; a verified update from the relevant service would refresh this dashboard.</p><div class="dialog-actions"><button class="button button--primary" id="simulateCompletion" type="button">Simulate verified completion</button><button class="button button--secondary" id="closeDialog" type="button">Close</button></div></div>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#88c697" stroke-width="1.8"/><path d="m8 12 2.5 2.5L16 9" stroke="#88c697" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div><strong>Prototype interaction</strong><span>In the CMS build, this would open the linked service securely.</span></div>
@@ -1555,11 +1607,23 @@
         }
       };
 
+      let activePersona = 'executive';
+      let activeVisit = 'returning';
+      const scenarioStates = {};
+      const state = () => scenarioStates[`${activePersona}-${activeVisit}`] ||= { completed: [], profileDone: false };
+      const dialog = document.getElementById('demoDialog');
+      let pendingTask = null;
+      const setupTasks = [
+        { title: 'Complete your profile', description: 'Check your contact details and add the missing information.', tag: 'Start here', cta: 'Review profile →', outcome: 'Your profile becomes complete. Programme access still depends on eligibility and any remaining setup steps.' },
+        { title: 'Set up account security', description: 'Review the available sign-in and verification options.', tag: 'Account setup', cta: 'Review security →', outcome: 'The preview records account security setup as complete. In production this must be confirmed by the identity service.' },
+        { title: 'Confirm your programme details', description: 'Review your programme relationship and start information.', tag: 'Programme setup', cta: 'Review details →', outcome: 'The preview confirms your programme details. When all setup steps are complete, eligible services appear ready in this scenario.' }
+      ];
+      const tasks = () => activeVisit === 'first' ? setupTasks : personaViews[activePersona].actions;
       const renderActions = (actions) => actions.map((action, index) => `
-        <li class="action-item">
-          <span class="action-number" aria-hidden="true">${index + 1}</span>
+        <li class="action-item ${state().completed.includes(index) ? 'task-complete' : ''}">
+          <span class="action-number" aria-hidden="true">${state().completed.includes(index) ? '✓' : index + 1}</span>
           <div class="action-copy"><strong>${action.title}</strong><span>${action.description}</span></div>
-          <div class="action-cta"><small>${action.tag}</small><a class="mock-link" href="#">${action.cta}</a></div>
+          <div class="action-cta"><small>${state().completed.includes(index) ? 'Complete · simulated' : action.tag}</small><button type="button" data-task="${index}">${state().completed.includes(index) ? 'View outcome →' : action.cta}</button></div>
         </li>`).join('');
 
       const renderAnnouncements = (announcements) => announcements.map((item) => `
@@ -1570,22 +1634,39 @@
         </a>`).join('');
 
       const renderPersona = (personaKey, revealContext = false) => {
+        activePersona = personaKey;
         const view = personaViews[personaKey];
+        const current = state();
+        const isFirst = activeVisit === 'first';
+        const allDone = current.completed.length === tasks().length;
+        const percent = current.profileDone ? 100 : isFirst ? 40 : view.percent;
+        document.getElementById('page-title').textContent = isFirst ? 'Welcome to INSEAD, Amira.' : 'Welcome back, Amira.';
+        document.querySelector('.hero-lede').textContent = isFirst ? 'Your INSEAD journey starts here. A few steps will help you get ready.' : allDone ? 'You’re up to date. Your services are ready whenever you need them.' : 'Your profile, applications and next steps—connected in one secure place.';
         document.getElementById('profileRole').textContent = view.role;
         document.getElementById('personaChip').textContent = view.role;
         document.getElementById('applications-title').textContent = view.title;
         document.getElementById('gatewaySubtitle').textContent = view.subtitle;
-        document.getElementById('profilePercent').textContent = `${view.percent}%`;
-        document.getElementById('profileAttention').textContent = view.attention;
-        document.getElementById('profileAction').textContent = view.profileAction;
-        document.getElementById('profileRecommendation').textContent = view.recommendation;
-        document.getElementById('panelScore').textContent = view.panelScore;
-        document.getElementById('progressRing').style.background = `conic-gradient(var(--green-bright) 0 ${view.percent}%, var(--green-soft) ${view.percent}% 100%)`;
-        document.getElementById('progressRing').setAttribute('aria-label', `Profile ${view.percent} percent complete`);
-        personalisationNote.innerHTML = view.context + ' Service names and statuses are illustrative for stakeholder discussion.';
+        document.getElementById('profilePercent').textContent = `${percent}%`;
+        document.getElementById('profileAttention').textContent = current.profileDone ? 'Your profile is up to date' : isFirst ? 'Let’s get your essential details ready' : view.attention;
+        document.getElementById('profileAction').textContent = current.profileDone ? 'View profile status' : isFirst ? 'Complete your profile' : view.profileAction;
+        document.getElementById('profileRecommendation').textContent = current.profileDone ? 'Profile completion does not grant programme access.' : view.recommendation;
+        document.getElementById('panelScore').textContent = `${tasks().length - current.completed.length} remaining · ${current.completed.length} complete`;
+        document.getElementById('profile-title').textContent = isFirst ? 'Get ready for your INSEAD journey' : allDone ? 'You’re up to date' : 'What needs your attention';
+        document.getElementById('progressRing').style.background = `conic-gradient(var(--green-bright) 0 ${percent}%, var(--green-soft) ${percent}% 100%)`;
+        document.getElementById('progressRing').setAttribute('aria-label', `Profile ${percent} percent complete`);
+        personalisationNote.innerHTML = view.context + (isFirst ? ' This first-visit scenario adds guided setup and shows services awaiting eligibility confirmation.' : ' Returning users see outstanding actions and updates.') + ' These rules, services and dates are indicative; actual eligibility and verified completion would determine the production view.';
 
         serviceCards.forEach((card, index) => {
-          const service = view.services[index];
+          const service = { ...view.services[index] };
+          const locked = isFirst && !allDone && index > 0;
+          if (locked) { service.status = 'Setup pending'; service.statusClass = 'service-status--locked'; service.description = 'Complete your setup. Availability will depend on your confirmed programme eligibility.'; }
+          if (isFirst && !locked) { service.status = 'Access ready'; service.statusClass = ''; }
+          const relatedTask = (activePersona === 'executive' ? [null, 1, 2, null] : [0, 1, null, 2])[index];
+          if (!isFirst && relatedTask !== null && current.completed.includes(relatedTask)) {
+            service.status = 'Up to date'; service.statusClass = ''; service.description = 'Your action is complete in this preview. Open this service whenever you need it.';
+          }
+          card.dataset.locked = String(locked);
+          card.dataset.service = String(index);
           const status = card.querySelector('.service-status');
           status.className = `service-status ${service.statusClass}`.trim();
           status.textContent = service.status;
@@ -1595,8 +1676,22 @@
           card.setAttribute('aria-label', `Open ${service.title}`);
         });
 
-        actionList.innerHTML = renderActions(view.actions);
-        announcementList.innerHTML = renderAnnouncements(view.announcements);
+        actionList.innerHTML = renderActions(tasks());
+        announcementList.innerHTML = renderAnnouncements(isFirst ? [
+          { month: 'Start', day: '01', title: 'Your welcome guide', meta: 'Essential information for your first visit' },
+          view.announcements[1],
+          { month: 'Help', day: '?', title: 'Need help getting started?', meta: 'Account and programme support' }
+        ] : view.announcements);
+        const next = tasks().findIndex((_, index) => !current.completed.includes(index));
+        document.getElementById('nextStepTitle').textContent = next < 0 ? 'All caught up, Amira.' : `${isFirst ? 'Get started' : 'Your next step'}: ${tasks()[next].title}`;
+        document.getElementById('nextStepDescription').textContent = next < 0 ? 'All scenario actions are complete. Future tasks appear here when relevant.' : `${current.completed.length} of ${tasks().length} actions complete in this preview. ${tasks()[next].description}`;
+        document.getElementById('nextStepButton').textContent = next < 0 ? 'Explore your services ↓' : 'View next step →';
+        document.getElementById('journeyFill').style.width = `${current.completed.length / tasks().length * 100}%`;
+        document.querySelector('.journey-meter').setAttribute('aria-valuenow', current.completed.length);
+        document.querySelectorAll('[data-visit]').forEach(button => {
+          button.classList.toggle('is-active', button.dataset.visit === activeVisit);
+          button.setAttribute('aria-pressed', String(button.dataset.visit === activeVisit));
+        });
 
         document.querySelectorAll('[data-persona]').forEach((button) => {
           const isActive = button.dataset.persona === personaKey;
@@ -1610,6 +1705,51 @@
         }
       };
 
+      const openTask = (index) => {
+        const profileOnly = index === 'profile';
+        const task = profileOnly ? setupTasks[0] : tasks()[index];
+        const completed = profileOnly ? state().profileDone : state().completed.includes(index);
+        pendingTask = completed ? null : index;
+        document.getElementById('dialogEyebrow').textContent = completed ? 'Simulated completion recorded' : 'Indicative service hand-off';
+        document.getElementById('dialogTitle').textContent = task.title;
+        document.getElementById('dialogDescription').textContent = `${task.description} In a real session, this would open the relevant service through single sign-on. Additional verification may be requested by that service.`;
+        document.getElementById('dialogOutcome').textContent = task.outcome || (task.title.includes('profile') ? setupTasks[0].outcome : 'After the action is completed in the service and its status is confirmed, this item would be marked complete and the dashboard would recommend the next outstanding step.');
+        document.getElementById('simulateCompletion').hidden = completed;
+        dialog.showModal();
+      };
+
+      document.querySelectorAll('[data-visit]').forEach(button => button.addEventListener('click', () => {
+        activeVisit = button.dataset.visit;
+        renderPersona(activePersona, true);
+      }));
+      document.getElementById('resetPreview').addEventListener('click', () => {
+        delete scenarioStates[`${activePersona}-${activeVisit}`];
+        renderPersona(activePersona);
+      });
+      document.getElementById('nextStepButton').addEventListener('click', () => {
+        const next = tasks().findIndex((_, index) => !state().completed.includes(index));
+        if (next < 0) document.getElementById('applications').scrollIntoView({ behavior: 'smooth' });
+        else openTask(next);
+      });
+      document.getElementById('profileAction').addEventListener('click', event => {
+        event.preventDefault();
+        openTask(activeVisit === 'first' || activePersona === 'executive' ? 0 : 'profile');
+      });
+      document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
+      document.getElementById('simulateCompletion').addEventListener('click', () => {
+        if (pendingTask === null) return;
+        const current = state();
+        if (pendingTask === 'profile' || tasks()[pendingTask].title.includes('profile')) current.profileDone = true;
+        if (pendingTask !== 'profile' && !current.completed.includes(pendingTask)) current.completed.push(pendingTask);
+        dialog.close();
+        renderPersona(activePersona);
+        toast.querySelector('strong').textContent = 'Preview updated';
+        toast.querySelector('span').textContent = 'Simulated completion only. Real progress requires the actual action and a verified service update.';
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 4500);
+      });
+
       document.querySelectorAll('[data-persona]').forEach((button) => {
         button.addEventListener('click', () => renderPersona(button.dataset.persona, true));
       });
@@ -1620,8 +1760,25 @@
       });
 
       document.addEventListener('click', (event) => {
+        const taskButton = event.target.closest('[data-task]');
+        if (taskButton) { openTask(Number(taskButton.dataset.task)); return; }
         const link = event.target.closest('.mock-link');
         if (!link) return;
+        if (link.classList.contains('app-card')) {
+          event.preventDefault();
+          if (link.dataset.locked === 'true') {
+            openTask(tasks().findIndex((_, index) => !state().completed.includes(index)));
+          } else {
+            pendingTask = null;
+            document.getElementById('dialogEyebrow').textContent = 'Single sign-on · illustrative preview';
+            document.getElementById('dialogTitle').textContent = link.querySelector('h3').textContent;
+            document.getElementById('dialogDescription').textContent = 'Your INSEAD identity would be used to open this service. Access depends on your account entitlements; the service may request additional verification.';
+            document.getElementById('dialogOutcome').textContent = 'Opening a service does not complete a task. Use the next-action checklist to simulate a verified completion and see the dashboard change.';
+            document.getElementById('simulateCompletion').hidden = true;
+            dialog.showModal();
+          }
+          return;
+        }
         const target = link.getAttribute('href');
         if (!target || target === '#') event.preventDefault();
         window.clearTimeout(toastTimer);
